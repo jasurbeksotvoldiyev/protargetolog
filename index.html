@@ -1,0 +1,367 @@
+<title>ProTargetolog</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: single centered column (1080px), flat sections split by hairlines, one blue accent, dark CTA band */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --line: #e2e5eb;
+  --fg: #14161c;
+  --muted: #5d6472;
+  --accent: #1f4fd8;
+  --btn: #1f4fd8;
+  --btn-fg: #ffffff;
+  --good: #14804a;
+  --band-bg: #14161c;
+  --band-fg: #ffffff;
+  --band-muted: #aab1bf;
+  --band-btn: #ffffff;
+  --band-btn-fg: #14161c;
+  --font-display: 'Unbounded', 'Manrope', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101319; --surface: #171b23; --line: #272c37; --fg: #eef0f4; --muted: #9aa2b1;
+    --accent: #7c9cff; --btn: #3a63e8; --btn-fg: #ffffff; --good: #4cc38a;
+    --band-bg: #0a0c10; --band-fg: #ffffff; --band-muted: #9aa2b1; --band-btn: #ffffff; --band-btn-fg: #14161c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101319; --surface: #171b23; --line: #272c37; --fg: #eef0f4; --muted: #9aa2b1;
+  --accent: #7c9cff; --btn: #3a63e8; --btn-fg: #ffffff; --good: #4cc38a;
+  --band-bg: #0a0c10; --band-fg: #ffffff; --band-muted: #9aa2b1; --band-btn: #ffffff; --band-btn-fg: #14161c;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.sec { display: flex; flex-direction: column; gap: 28px; padding-block: 72px; border-top: 1px solid var(--line); }
+h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h2 { font-weight: 700; font-size: clamp(22px, 3vw, 30px); line-height: 1.2; }
+h1 { font-weight: 700; font-size: clamp(28px, 5vw, 52px); line-height: 1.12; letter-spacing: -0.01em; max-width: 860px; }
+h1 em { font-style: normal; color: var(--accent); }
+p { margin: 0; }
+.lead { max-width: 640px; color: var(--muted); }
+.row { display: flex; flex-wrap: wrap; gap: 16px; }
+.row.tight { gap: 12px; }
+
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-block: 20px; }
+.brand { font-family: var(--font-display); font-weight: 500; font-size: 17px; color: var(--fg); text-decoration: none; }
+.toplink { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; font-size: 15px; color: var(--accent); text-decoration: none; }
+
+.hero { display: flex; flex-direction: column; gap: 28px; padding-block: 48px 72px; }
+.who { display: flex; align-items: center; gap: 14px; }
+.who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); }
+.who span { display: block; color: var(--muted); font-size: 15px; }
+.hero p.sub { max-width: 640px; color: var(--muted); font-size: 18px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 28px; border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; }
+.btn-fill { background: var(--btn); color: var(--btn-fg); }
+.btn-line { border: 1px solid var(--line); background: var(--surface); color: var(--fg); }
+.btn-out { min-height: 48px; border: 1px solid var(--accent); color: var(--accent); }
+.btn svg { flex: none; }
+
+.stat { flex: 1 1 180px; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; display: flex; flex-direction: column; }
+.stat b { font-family: var(--font-display); font-weight: 500; font-size: 22px; font-variant-numeric: tabular-nums; }
+.stat.big { flex-basis: 200px; padding-block: 18px; }
+.stat.big b { font-size: 24px; }
+.stat span { color: var(--muted); font-size: 14px; }
+.note { color: var(--muted); font-size: 15px; }
+
+.about { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+.about img { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); flex: none; }
+.about .txt { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.about .name { font-family: var(--font-display); font-weight: 500; font-size: 20px; }
+.about p.big { font-size: 17px; }
+
+.card { flex: 1 1 300px; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 16px; }
+.card .t { font-weight: 700; font-size: 18px; display: block; }
+.card .s { color: var(--muted); font-size: 14px; display: block; }
+.metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.metrics div { border-top: 1px solid var(--line); padding-top: 8px; }
+.metrics small { display: block; color: var(--muted); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+.metrics b { font-variant-numeric: tabular-nums; }
+
+.week { flex: 1 1 240px; gap: 14px; }
+.week .k { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: 0.06em; }
+.week b { font-size: 17px; line-height: 1.3; }
+.week ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; color: var(--muted); font-size: 15px; }
+
+.plan { padding: 26px; gap: 18px; }
+.plan .price { font-family: var(--font-display); font-weight: 700; font-size: 34px; font-variant-numeric: tabular-nums; display: block; margin-top: 4px; }
+.plan ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.plan li.seats { color: var(--muted); font-size: 15px; }
+.plan.pick { border: 2px solid var(--accent); }
+
+.fit { flex: 1 1 320px; padding: 24px; gap: 12px; }
+.fit.yes > b { color: var(--good); }
+.fit.no > b { color: var(--muted); }
+
+.faq { display: flex; flex-direction: column; }
+.faq h2 { margin-bottom: 20px; }
+.faq div { display: flex; flex-direction: column; gap: 6px; padding-block: 20px; border-top: 1px solid var(--line); }
+.faq div:last-child { border-bottom: 1px solid var(--line); }
+.faq span { color: var(--muted); max-width: 720px; }
+
+.band { background: var(--band-bg); color: var(--band-fg); padding-block: 72px; }
+.band .in { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.band h2 { max-width: 760px; font-size: clamp(24px, 3.4vw, 36px); }
+.band p { max-width: 620px; color: var(--band-muted); font-size: 17px; }
+.band p.fine { font-size: 14px; margin-top: 8px; }
+.band .btn { background: var(--band-btn); color: var(--band-btn-fg); }
+
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 28px; color: var(--muted); font-size: 14px; }
+.foot a { color: var(--accent); font-weight: 600; text-decoration: none; }
+</style>
+
+<div id="top">
+<div class="wrap">
+
+<div class="top">
+<a class="brand" href="#top">ProTargetolog</a>
+<a class="toplink" href="https://t.me/jasurbek_sotvoldiyevv?text=Target%20kursingizda%20o%27qimoqchiman" target="_blank" rel="noopener">Telegram'da yozish</a>
+</div>
+
+<section class="hero">
+<div class="who">
+<img src="data:image/jpeg;base64,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" alt="Jasurbek Sotvoldiyev" width="56" height="56">
+<div><b>Jasurbek Sotvoldiyev</b><span>Targetolog, 2 yildan beri</span></div>
+</div>
+<h1>Noldan Meta Ads o'rganing: <em>30 kunda</em> birinchi reklamangiz va birinchi mijozga yo'l</h1>
+<p class="sub">Onlayn kurs: haftada 3 ta dars, jami 12 ta dars. Tajriba shart emas, boshlovchilar uchun.</p>
+<div class="row tight">
+<a class="btn btn-fill" href="https://t.me/jasurbek_sotvoldiyevv?text=Target%20kursingizda%20o%27qimoqchiman" target="_blank" rel="noopener">O'qimoqchiman
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
+<a class="btn btn-line" href="#dastur">Dasturni ko'rish</a>
+</div>
+<div class="row tight">
+<div class="stat"><b>30 kun</b><span>kurs davomiyligi</span></div>
+<div class="stat"><b>12 dars</b><span>haftada 3 ta</span></div>
+<div class="stat"><b>Onlayn</b><span>darslar yozib olinadi</span></div>
+<div class="stat"><b>3 tarif</b><span>$150 dan boshlab</span></div>
+</div>
+<p class="note">Birinchi oqim sanasi tez orada e'lon qilinadi. Joy qolishi uchun Telegram'ga yozing.</p>
+</section>
+
+<section id="ustoz" class="sec">
+<h2>Ustoz haqida</h2>
+<div class="about">
+<img src="data:image/jpeg;base64,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" alt="Jasurbek Sotvoldiyev" width="128" height="128">
+<div class="txt">
+<div class="name">Jasurbek Sotvoldiyev</div>
+<p class="big">Men ham talabalikdan, hech qanday ish tajribasiz boshlaganman. Birinchi mijozimni targetni boshlaganimdan keyin bir oy ichida topdim: tanish-bilishlar orqali. Hozir 2 yildan beri targetologman va 20 dan ortiq o'quvchiga dars berganman.</p>
+<p class="lead">Kursda o'zim o'tgan yo'lni ko'rsataman: reklamani ishga tushirishdan birinchi mijozni topishgacha.</p>
+</div>
+</div>
+<div class="row tight">
+<div class="stat big"><b>$94 000+</b><span>boshqarilgan reklama byudjeti</span></div>
+<div class="stat big"><b>400+</b><span>ishga tushirilgan kampaniya</span></div>
+<div class="stat big"><b>12 000+</b><span>olingan lid</span></div>
+<div class="stat big"><b>20+</b><span>o'quvchiga dars bergan</span></div>
+</div>
+</section>
+
+<section id="keyslar" class="sec">
+<h2>Kursda o'rgatadigan ishning natijalari</h2>
+<p class="lead">Mijozlar uchun yuritgan kampaniyalarimdan uchtasi. Lid narxi mijozning sohasiga bog'liq.</p>
+<div class="row">
+
+<div class="card">
+<div><span class="t">Zim-Zim</span><span class="s">Biznesni avtomatlashtirish</span></div>
+<div class="metrics">
+<div><small>Sarflandi</small><b>$53 730</b></div>
+<div><small>Lidlar</small><b>6 300+</b></div>
+<div><small>1 lid narxi</small><b>$2,66</b></div>
+<div><small>Qamrov</small><b>10,2 mln</b></div>
+</div>
+</div>
+
+<div class="card">
+<div><span class="t">Maydan Ta'lim</span><span class="s">O'quv markazi: arab va ingliz tili</span></div>
+<div class="metrics">
+<div><small>Sarflandi</small><b>$19 443</b></div>
+<div><small>Lidlar</small><b>1 500+</b></div>
+<div><small>1 lid narxi</small><b>$1,95</b></div>
+<div><small>Qamrov</small><b>5,1 mln</b></div>
+</div>
+</div>
+
+<div class="card">
+<div><span class="t">Intouch</span><span class="s">Interaktiv panel va infokiosklar</span></div>
+<div class="metrics">
+<div><small>Sarflandi</small><b>$15 383</b></div>
+<div><small>Lidlar</small><b>1 100+</b></div>
+<div><small>1 lid narxi</small><b>$4,16</b></div>
+<div><small>Qamrov</small><b>5,0 mln</b></div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="dastur" class="sec">
+<h2>30 kunlik dastur</h2>
+<p class="lead">4 hafta, haftada 3 dars. Har hafta aniq natija bilan tugaydi.</p>
+<div class="row">
+
+<div class="card week">
+<div class="k">1-HAFTA</div>
+<b>Birinchi reklamangiz ishlab turadi</b>
+<ol>
+<li>1. Meta Ads qanday ishlaydi: auksion va kampaniya maqsadi</li>
+<li>2. Kabinet, to'lov usuli, pixel</li>
+<li>3. Birinchi kampaniyani ishga tushirish</li>
+</ol>
+</div>
+
+<div class="card week">
+<div class="k">2-HAFTA</div>
+<b>Offer va kreativlaringiz tayyor</b>
+<ol>
+<li>4. Auditoriya va offer: kimga nima deb aytasiz</li>
+<li>5. Kreativ: hook va matn</li>
+<li>6. Test va natijani o'qish (CPM, CTR, CPL)</li>
+</ol>
+</div>
+
+<div class="card week">
+<div class="k">3-HAFTA</div>
+<b>Birinchi mijozga taklifingiz tayyor</b>
+<ol>
+<li>7. Birinchi mijozni qayerdan topasiz</li>
+<li>8. Taklif va muzokara</li>
+<li>9. Narx belgilash</li>
+</ol>
+</div>
+
+<div class="card week">
+<div class="k">4-HAFTA</div>
+<b>Mijozga hisobot berishga tayyorsiz</b>
+<ol>
+<li>10. Mijoz kampaniyasini ishga tushirish</li>
+<li>11. Optimizatsiya: lid sifati</li>
+<li>12. Hisobot va doimiy mijozga aylantirish</li>
+</ol>
+</div>
+
+</div>
+</section>
+
+<section id="tariflar" class="sec">
+<h2>Tariflar</h2>
+<p class="lead">Uchala tarifda dastur bir xil, farq shaxsiy yordam miqdorida. Joylar cheklangan.</p>
+<div class="row">
+
+<div class="card plan">
+<div><span class="t">Standart</span><span class="price">$150</span></div>
+<ul>
+<li>12 ta jonli dars: haftada 3, bir oy davomida</li>
+<li>Barcha darslarning yozuvi</li>
+<li>Darslar tugagach, 1 oy qo'shimcha yordam</li>
+<li class="seats">Joylar: har oqimda 10 ta</li>
+</ul>
+<a class="btn btn-out" href="https://t.me/jasurbek_sotvoldiyevv?text=Target%20kursingizda%20o%27qimoqchiman.%20Tarif%3A%20Standart" target="_blank" rel="noopener">Standartni tanlayman</a>
+</div>
+
+<div class="card plan">
+<div><span class="t">Premium</span><span class="price">$200</span></div>
+<ul>
+<li>Standartdagi hamma narsa</li>
+<li>Haftada 1 marta 1-on-1 uchrashuv</li>
+<li>Qo'shimcha yordam 2 oy</li>
+<li class="seats">Joylar: har oqimda 10 ta</li>
+</ul>
+<a class="btn btn-out" href="https://t.me/jasurbek_sotvoldiyevv?text=Target%20kursingizda%20o%27qimoqchiman.%20Tarif%3A%20Premium" target="_blank" rel="noopener">Premiumni tanlayman</a>
+</div>
+
+<div class="card plan pick">
+<div><span class="t">VIP</span><span class="price">$400</span></div>
+<ul>
+<li>Barcha 12 dars sizga shaxsan, alohida o'tiladi</li>
+<li>Haftada 1 marta 1-on-1 uchrashuv</li>
+<li>Dars yozuvlari</li>
+<li>Qo'shimcha yordam 2 oy</li>
+<li class="seats">Joylar: har oqimda 2 ta</li>
+</ul>
+<a class="btn btn-fill" style="min-height:48px" href="https://t.me/jasurbek_sotvoldiyevv?text=Target%20kursingizda%20o%27qimoqchiman.%20Tarif%3A%20VIP" target="_blank" rel="noopener">VIP'ni tanlayman</a>
+</div>
+
+</div>
+</section>
+
+<section id="kimuchun" class="sec">
+<h2>Kurs kim uchun</h2>
+<div class="row">
+<div class="card fit yes">
+<b>Mos keladi</b>
+<div>Tajribasi yo'q, lekin targetni kasb sifatida o'rganmoqchi bo'lganlar</div>
+<div>Talaba yoki ishlaydigan odam, uyda bola bilan o'tiradiganlar: darslar onlayn va yozuvi bor</div>
+<div>Bepul darslardan o'zi urinib ko'rgan, lekin tizimsiz qolganlar</div>
+</div>
+<div class="card fit no">
+<b>Mos kelmaydi</b>
+<div>Allaqachon mijozlari bor va narxni oshirmoqchi bo'lgan targetologlar: kurs boshlovchilar uchun</div>
+<div>Bir hafta ichida tayyor daromad kutayotganlar</div>
+</div>
+</div>
+</section>
+
+<section id="savol" class="sec faq">
+<h2>Ko'p so'raladigan savollar</h2>
+<div>
+<b>Menda tajriba yo'q. Eplay olamanmi?</b>
+<span>Kurs noldan boshlanadi. 1-haftada birinchi kampaniyangizni dars davomida ishga tushirasiz, shuning uchun oldindan bilim shart emas.</span>
+</div>
+<div>
+<b>Vaqtim kam, uyda bola bor. Bu kurs mumkinmi?</b>
+<span>Darslar onlayn va yozib olinadi: qulay vaqtingizda ko'rasiz. Haftada 3 ta dars, jami 4 hafta.</span>
+</div>
+<div>
+<b>YouTube'da bepul darslar bor-ku?</b>
+<span>Bepul darslar odatda bir-biri bilan bog'lanmaydi. Kursda esa 12 ta dars ketma-ket, har hafta aniq natija bilan o'tadi, darslardan keyin yana 1 oy yordam beriladi.</span>
+</div>
+<div>
+<b>Kurs daromad olib keladimi?</b>
+<span>Daromadni kafolatlamaymiz. Kurs sizga birinchi reklamani ishga tushirish va birinchi mijozga olib boradigan yo'lni beradi. Natija sizning amaliyotingizga bog'liq.</span>
+</div>
+</section>
+
+</div>
+
+<section class="band">
+<div class="wrap in">
+<h2>Birinchi oqimda joyingizni band qiling</h2>
+<p>Oqim sanasi tez orada e'lon qilinadi. Telegram'ga yozing, joy va sana haqida javob beraman.</p>
+<a class="btn" href="https://t.me/jasurbek_sotvoldiyevv?text=Target%20kursingizda%20o%27qimoqchiman" target="_blank" rel="noopener">Telegram'da yozish
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
+<p class="fine">Kurs daromadni kafolatlamaydi: natija sizning amaliyotingizga bog'liq.</p>
+</div>
+</section>
+
+<div class="wrap foot">
+<span>Jasurbek Sotvoldiyev, ProTargetolog</span>
+<a href="https://t.me/jasurbek_sotvoldiyevv" target="_blank" rel="noopener">@jasurbek_sotvoldiyevv</a>
+</div>
+</div>
